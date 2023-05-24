@@ -42,7 +42,7 @@ class ChatBroadCaster:
             "member_id": member["id"],
         }
 
-        self.broadcast(data)
+        cls.broadcast(data)
 
     @classmethod
     def add_member(cls, member):
