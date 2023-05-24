@@ -20,7 +20,6 @@ export const StyledMention = styled.span<{ rounded: boolean }>`
   font-size: 0.75em;
   font-weight: 400;
   padding: 2px 8px;
-  /* max-width: 100px; */
   margin: 5px;
 
   border-radius: ${(props) => (props.rounded ? "20px" : "0px")};

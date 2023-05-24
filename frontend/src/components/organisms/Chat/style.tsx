@@ -22,7 +22,6 @@ export const StyledChatHeader = styled.div`
   align-items: center;
   justify-content: space-between;
   background: ${(props) => props.theme.gradient2};
-  /* border: 1px solid ${(props) => props.theme.colorBG5}; */
 `;
 
 export const StyledChatBody = styled.div`
@@ -59,10 +58,8 @@ export const StyledChatMessages = styled.div`
 export const StyledChatUsers = styled.div`
   padding: 10px;
   overflow: hidden;
-  background: ${(props) => props.theme.colorBG7};
   border-right: 1px solid ${(props) => props.theme.colorBG2};
   height: calc(60vh - 140px);
-  /* border-top: 1px solid ${(props) => props.theme.colorBG2}; */
   overflow-y: scroll;
   width: 200px;
 
