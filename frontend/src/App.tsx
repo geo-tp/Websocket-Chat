@@ -111,7 +111,6 @@ function App() {
 
   return (
     <div className="App">
-      (
       {user.id !== 0 && (
         <Chat
           members={members}
@@ -120,7 +119,7 @@ function App() {
           onSubmit={onMessageSubmit}
         />
       )}
-      )
+
       {user.id === 0 && (
         <Register
           registerMessage={registerMessage}

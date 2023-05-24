@@ -20,7 +20,7 @@ Created with node 17.9.1 and npm 8.11.0
 ### `npm start`
 
 
-## BACKEND - 
+## BACKEND
 
 Created with python 3.10.6
 
