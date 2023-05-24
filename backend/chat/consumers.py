@@ -22,18 +22,18 @@ class ChatConsumer(WebsocketConsumer):
         self.close()
 
     def receive(self, text_data):
-        text_data_json = json.loads(text_data)
-        op_code = text_data_json["op_code"]
+        data_json = json.loads(text_data)
+        op_code = data_json["op_code"]
 
         if op_code == opcodes.S_RECEIVE_PSEUDO:
-            pseudo = text_data_json["pseudo"]
+            pseudo = data_json["pseudo"]
             self._set_user(pseudo)
             self.broadcaster.send_members(self)
             self.broadcaster.add_member({"socket": self, "user": self.user})
             self.broadcaster.send_profile(self, self.user)
 
         else:
-            message = text_data_json["content"]
+            message = data_json["content"]
             self.broadcaster.broadcast_new_message(message, self.user)
 
     def _set_user(self, pseudo):
