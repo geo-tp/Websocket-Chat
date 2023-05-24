@@ -10,50 +10,39 @@ class ChatBroadCaster:
     @classmethod
     def broadcast_members(cls):
         members = [UserSerializer(member["user"]).data for member in cls.MEMBERS]
+        data = {"op_code": opcodes.C_RECEIVE_MEMBERS, "members": members}
 
-        for member in cls.MEMBERS:
-            member["socket"].send(
-                json.dumps({"op_code": opcodes.C_RECEIVE_MEMBERS, "members": members})
-            )
+        cls.broadcast(data)
 
     @classmethod
     def broadcast_new_message(cls, message, user):
         obj_message = Message.objects.create(content=message, user=user)
         serialized_message = MessageSerializer(obj_message).data
 
-        for member in cls.MEMBERS:
-            member["socket"].send(
-                json.dumps(
-                    {
-                        "op_code": opcodes.C_RECEIVE_MESSAGE,
-                        "message": serialized_message,
-                    }
-                )
-            )
+        data = {
+            "op_code": opcodes.C_RECEIVE_MESSAGE,
+            "message": serialized_message,
+        }
+
+        cls.broadcast(data)
 
     @classmethod
     def broadcast_new_member(cls, member):
-        for m in cls.MEMBERS:
-            m["socket"].send(
-                json.dumps(
-                    {
-                        "op_code": opcodes.C_RECEIVE_NEW_MEMBER,
-                        "member": member,
-                    }
-                )
-            )
+        data = {
+            "op_code": opcodes.C_RECEIVE_NEW_MEMBER,
+            "member": member,
+        }
+
+        cls.broadcast(data)
 
     @classmethod
     def broadcast_disconnected_member(cls, member):
-        for m in cls.MEMBERS:
-            m["socket"].send(
-                json.dumps(
-                    {
-                        "op_code": opcodes.C_RECEIVE_DISCONNECTED_MEMBER,
-                        "member_id": member["id"],
-                    }
-                )
-            )
+        data = {
+            "op_code": opcodes.C_RECEIVE_DISCONNECTED_MEMBER,
+            "member_id": member["id"],
+        }
+
+        self.broadcast(data)
 
     @classmethod
     def add_member(cls, member):
@@ -88,3 +77,8 @@ class ChatBroadCaster:
                 {"op_code": opcodes.C_RECEIVE_PROFILE, "profile": serialized_profile}
             )
         )
+
+    @classmethod
+    def broadcast(cls, data):
+        for m in cls.MEMBERS:
+            m["socket"].send(json.dumps(data))
