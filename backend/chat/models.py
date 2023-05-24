@@ -1,8 +1,6 @@
 from django.db import models
 from datetime import datetime
 
-# Create your models here.
-
 
 class User(models.Model):
     name = models.CharField(unique=True, max_length=64)

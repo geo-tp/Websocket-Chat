@@ -17,7 +17,7 @@ export const ChatMessages = (props: { messages: MessageType[] }) => {
   return (
     <StyledChatMessages ref={chatRef}>
       {props.messages.map((message) => (
-        <Message message={message} />
+        <Message key={`message-chat-${message.id}`} message={message} />
       ))}
     </StyledChatMessages>
   );

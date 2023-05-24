@@ -11,6 +11,7 @@ export const ChatUsers = (props: { members: UserType[] }) => {
     <StyledChatUsers ref={chatRef}>
       {props.members?.map((user: UserType) => (
         <User
+          key={user.id + user.name}
           src={DefaultThumb}
           alt={"profile thumbnail"}
           title={user.name}
