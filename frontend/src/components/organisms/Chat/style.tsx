@@ -43,6 +43,17 @@ export const StyledChatMessages = styled.div`
   padding-top: 20px;
   height: calc(60vh - 196px);
   overflow-y: scroll;
+
+  &::-webkit-scrollbar {
+    height: 12px;
+    width: 8px;
+    background: ${(props) => props.theme.colorBG1};
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: ${(props) => props.theme.colorBG4};
+    -webkit-border-radius: 1ex;
+  }
 `;
 
 export const StyledChatUsers = styled.div`
@@ -54,6 +65,10 @@ export const StyledChatUsers = styled.div`
   /* border-top: 1px solid ${(props) => props.theme.colorBG2}; */
   overflow-y: scroll;
   width: 200px;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 
   & img {
     padding: 5px 5px;
