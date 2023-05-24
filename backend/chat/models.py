@@ -1,4 +1,5 @@
 from django.db import models
+from datetime import datetime
 
 # Create your models here.
 
@@ -12,5 +13,5 @@ class User(models.Model):
 
 class Message(models.Model):
     content = models.CharField(max_length=2048)
-    date = models.DateField(auto_now=True)
+    date = models.DateTimeField(default=datetime.now().strftime(("%Y-%m-%d %H:%M:%S")))
     user = models.ForeignKey(User, on_delete=models.CASCADE)
