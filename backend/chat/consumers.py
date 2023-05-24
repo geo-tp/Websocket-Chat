@@ -1,4 +1,3 @@
-# chat/consumers.py
 import json
 
 from channels.generic.websocket import WebsocketConsumer
@@ -18,6 +17,8 @@ class ChatConsumer(WebsocketConsumer):
 
     def disconnect(self, close_code):
         self.broadcaster.remove_member(self.user)
+        self.user.is_connected = False
+        self.user.save()
         self.close()
 
     def receive(self, text_data):
