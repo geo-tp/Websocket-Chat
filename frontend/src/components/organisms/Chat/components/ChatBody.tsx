@@ -12,13 +12,6 @@ export const ChatBody = (props: {
 }) => {
   const chatRef = useRef<HTMLDivElement>(null);
 
-  // Scroll to bottom
-  useEffect(() => {
-    if (chatRef.current) {
-      chatRef.current.scrollTop = chatRef.current.scrollHeight;
-    }
-  }, [props.messages]);
-
   return (
     <StyledChatBody ref={chatRef}>
       <ChatUsers members={props.members} />
